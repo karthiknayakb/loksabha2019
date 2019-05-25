@@ -16,3 +16,16 @@ for state in states:
 
 with open("states.json","w") as st:
     json.dump(state_dict,st)
+
+urltemp = "http://results.eci.gov.in/pc/en/constituencywise/Constituencywise%s%s.htm?ac=%s"
+#stateID,constituency,constituency
+clinks = []
+for state in state_dict:
+    consti = state_dict[state].split(";")
+    for c in consti:
+        if c:
+            cid = c.split(",")[0]
+            clinks.append(urltemp%(state,cid,cid))
+            
+def getdata(url):
+    
