@@ -31,7 +31,9 @@ def getdata(url):
     soup = BeautifulSoup(requests.get(url).content,"html.parser")
     table = soup.find("table",{"class","table-party"})
     c_data = {}
-    c_data["constituency"] = table.find("tr").text.strip()
+    constituncy = table.find("tr").text.strip()
+    c_data["state"] = constituncy.split("-")[0].strip()
+    c_data["constituency"] = constituncy.split("-")[1].strip()
     c_data["url"] = url
     headings = []
     for h in table.find("tr",{"style":"height: 20px; background-color: #FFC0CD; color:Black;"}).find_all("th"):
